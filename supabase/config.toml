@@ -1,0 +1,3 @@
+[functions.product-image]
+# Only logged-in users; handler also validates Auth and the existing access list.
+verify_jwt = true
