@@ -1,0 +1,238 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>两地价 · 分步部署指南</title><meta name="referrer" content="no-referrer"><style>
+:root{--ink:#233d32;--muted:#657568;--line:#dce5d9;--green:#1b4c40;}*{box-sizing:border-box}body{margin:0;background:#f6f7f2;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-size:15px;line-height:1.9}header{background:#174b42;color:#f4f7ef;padding:40px max(24px,calc((100vw - 1200px)/2));}header span{font-size:12px;letter-spacing:2px;opacity:.7}header h1{font-size:32px;margin:10px 0}header p{margin:0;color:#d2e1ce}.layout{max-width:1250px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:42px;padding:34px 24px 80px;margin:auto}aside{position:sticky;top:20px;align-self:start;border-right:1px solid var(--line);padding-right:22px;font-size:12px}aside a{display:block;color:var(--muted);text-decoration:none;padding:8px 0;line-height:1.6}aside a:hover{color:var(--green)}article{min-width:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:36px 42px;}article>h1{font-size:27px;line-height:1.45;margin:0 0 22px}h2{font-size:23px;border-top:1px solid var(--line);padding-top:26px;margin-top:42px;scroll-margin-top:22px}h3{font-size:18px;margin-top:26px}a{color:#26785f;overflow-wrap:anywhere;text-underline-offset:3px}blockquote{background:#eef4e9;border-left:4px solid #7f9a72;margin:24px 0;padding:12px 20px;}blockquote p{margin:0}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;background:#f3f5ef;border:1px solid var(--line);border-radius:10px;padding:18px;line-height:1.7}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em;background:#f1f4ed;border-radius:3px;padding:2px 4px}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:13px;margin:22px 0;table-layout:fixed}th,td{text-align:left;vertical-align:top;border:1px solid var(--line);padding:12px;overflow-wrap:anywhere}th{background:#eef3e8}li{margin:5px 0}.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:25px 0}.flow div{border:1px solid var(--line);background:#f8faf5;padding:14px;border-radius:10px}.flow b{display:block;font-size:16px}.flow small{display:block;color:var(--muted);font-size:12px}.preview{margin:28px 0}.preview img{width:100%;border:1px solid var(--line);border-radius:12px}.preview figcaption{color:var(--muted);font-size:12px;text-align:center}.stamp{font-size:12px;color:var(--muted);padding-top:30px;border-top:1px solid var(--line)}@media(max-width:900px){.layout{grid-template-columns:1fr;padding:18px 14px 40px;gap:18px}aside{position:static;border:0;display:grid;grid-template-columns:1fr 1fr;background:#edf2e7;padding:18px;border-radius:12px}article{padding:25px 22px}header{padding:30px 24px}header h1{font-size:26px}h2{font-size:21px}table{font-size:12px}th,td{padding:8px}}@media(max-width:500px){.flow{grid-template-columns:1fr}article{padding:22px 16px}aside{grid-template-columns:1fr}pre{padding:13px;font-size:12px}}@media print{header{background:none;color:#233d32;padding:12px}aside,.preview{display:none}.layout{display:block;padding:0}article{border:0;padding:0}h2{break-after:avoid}pre,table{break-inside:avoid}}
+</style></head><body><header><span>LIANG DI JIA / DEPLOYMENT GUIDE</span><h1>一次部署，换设备继续用。</h1><p>先保护旧资料，再建立云端，最后用两台设备确认同步。</p></header><div class="layout"><aside aria-label="目录"><a href="#section-0">0. 开始前，先保护旧资料</a><a href="#section-1">1. 建立免费的 Supabase 项目</a><a href="#section-2">2. 运行建表脚本——不必逐个手工建表</a><a href="#section-3">3. 创建你自己的“网站登录账号”</a><a href="#section-4">4. 给这个账号授权，并自检权限</a><a href="#section-5">5. 填写 config.js——只改两处</a><a href="#section-6">6. 上传 GitHub 并打开 Pages</a><a href="#section-7">7. 第一次登录与旧资料迁移</a><a href="#section-8">8. iCloud 备份怎样日常使用</a><a href="#section-9">9. 冲突与断网：怎样处理才不会丢东西</a><a href="#section-10">10. 常见问题</a><a href="#section-11">开发者补充（首次部署不必做）</a></aside><article><div class="flow"><div><b>GitHub Pages</b><small>上传网页代码 · 固定网址</small></div><div><b>Supabase Free</b><small>登录、数据库与访问权限</small></div><div><b>iCloud Drive</b><small>存放你主动导出的备份</small></div></div><figure class="preview"><img src="./assets/setup-preview.png" alt="两地价未配置项目时的引导界面"><figcaption>本包的实际引导界面；不是已配置完成的线上账号。</figcaption></figure><h1>两地价 v0.2：从下载文件到跨设备同步</h1>
+<p><strong>部署组合：GitHub Pages＋Supabase Free＋iCloud 手动备份。</strong></p>
+<p>本包是已经改造好的网页代码，不是已经替你开通的在线服务。你需要在自己的账号中完成下列配置。无需安装 npm、打包前端或让 Mac 一直运行。核对日期：2026 年 10 月 10 日。</p>
+<blockquote>
+<p>分清三个位置：**网页文件上传 GitHub；SQL 脚本在 Supabase 执行；个人 JSON 备份放 iCloud。**不要把个人备份或旧版 SQLite 数据库上传到公开仓库。</p>
+</blockquote>
+<h2 id="section-0">0. 开始前，先保护旧资料</h2>
+<p>打开你目前使用的 v0.1 网页，进入“设置与备份”，点击“导出 JSON 备份”。确认下载到了一个 <code>.json</code> 文件，再复制到 <code>iCloud Drive/两地价备份/</code>。</p>
+<p>这一动作必须在原来保存资料的浏览器里完成。v0.1 的浏览器存储不会因为新网址上线而自动迁移。不要先清理原浏览器或删除旧版文件。</p>
+<p>下载并解压 v0.2 包。你会看到：</p>
+<pre><code class="language-text">liangdijia-v0.2-cloud/
+  index.html                 网站入口
+  config.js                  你只需要修改这个配置文件
+  assets/                    界面、同步与登录代码
+  manifest.webmanifest       手机入口信息
+  .nojekyll                  Pages 静态文件标记
+  supabase/
+    01-schema.sql            建表、RLS 与保存函数
+    02-authorize.sql         授权自己的 Auth 用户
+    03-check.sql             部署权限自检
+  DEPLOY.html                可双击打开的本指南
+  DEPLOY.md / README.md      说明文本
+  TEST_REPORT.md             测试范围与未验证事项
+  tests/                     本地测试；日常使用不需要运行
+</code></pre>
+<h2 id="section-1">1. 建立免费的 Supabase 项目</h2>
+<p>打开 <a href="https://supabase.com/dashboard">Supabase 控制台</a>。可以使用 GitHub 账号登录其管理后台，但这<strong>不会自动创建两地价的网站登录账号</strong>。</p>
+<p>选择或新建一个 <strong>Free</strong> 组织，点 <strong>New project</strong>。项目名称可填 <code>liangdijia</code>；数据库密码自行生成并保存到自己的密码管理器。区域选择界面中可用的亚洲区域即可，例如列表中出现 Singapore 时可选它；这不保证深圳访问速度，后面要用你的真实网络实测。</p>
+<p>确认组织／项目属于免费方案，不需要为本教程升级到 Pro，不启用付费附加功能。项目建立后进入项目控制台。</p>
+<p>**预期结果：**你能看到项目左侧的 SQL Editor、Authentication、Table Editor 等入口。</p>
+<p>Supabase 当前 Free 包含 500 MB 数据库，并有连续一周不活跃暂停等限制；免费规则可能变化，以当时控制台为准。<a href="https://supabase.com/pricing">官方费用与限额</a></p>
+<h2 id="section-2">2. 运行建表脚本——不必逐个手工建表</h2>
+<p>用 VS Code 或其他纯文本编辑器打开包内 <code>supabase/01-schema.sql</code>，复制<strong>全部内容</strong>。</p>
+<p>在 Supabase 项目中进入 <strong>SQL Editor → New query</strong>，粘贴全文，然后点 <strong>Run</strong>。运行成功后显示 Success／No rows returned 是正常结果：脚本主要建立结构，不会给你塞入示例商品。</p>
+<p>在 Table Editor 可看到 <code>ldj_access</code> 和 <code>ldj_workspaces</code> 两张表。第一张是准入名单；第二张保存该用户完整的购物空间。刚建好时为空是正常的。</p>
+<p>**不要关闭 RLS。**脚本已经设置“登录用户只能访问自己的资料”，并限制未授权用户、匿名用户和公开连接密钥的权限。资料权限在数据库端检查，不是靠隐藏网页按钮。<a href="https://supabase.com/docs/guides/database/postgres/row-level-security">RLS 官方说明</a></p>
+<p>脚本可重复运行，不会清空已有购物数据。它不修改你的其他业务表。首次请使用专门为两地价创建的项目。</p>
+<h2 id="section-3">3. 创建你自己的“网站登录账号”</h2>
+<p>进入 <strong>Authentication → Users → Add user → Create new user</strong>。填写你自己使用的邮箱，并设置一个独立的网站密码，建议至少 12 位。</p>
+<p>如果有 <strong>Auto Confirm User</strong> 选项，保持勾选。这是在你自己的控制台创建自己的账号，不需要等待验证码邮件。不要选 Send invitation；本版不处理邀请邮件里的登录回调。</p>
+<p>创建完成后，点开这名用户，复制 <strong>User UID</strong>。它是类似下面这样的 UUID，不是邮箱：</p>
+<pre><code class="language-text">12345678-1234-1234-1234-123456789abc
+</code></pre>
+<p>在 <strong>Authentication → Sign In / Providers</strong>（某些界面在 Configuration 下）关闭 <strong>Allow new users to sign up</strong>；保持 Email 登录启用，保持匿名登录关闭。控制台菜单可能调整，找同名选项即可。不要为了解决问题全局关闭邮箱验证；用刚才创建时的自动确认选项即可。<a href="https://supabase.com/docs/guides/auth/general-configuration">Auth 配置说明</a></p>
+<p>本网页只提供邮箱＋密码登录，不包含注册入口，也没有配置 GitHub OAuth、邮箱魔法链接或短信登录。默认邮件服务有收件人和发送次数限制，这条路线让日常登录不依赖邮件。<a href="https://supabase.com/docs/guides/auth/auth-smtp">邮件限制说明</a></p>
+<h3>三样容易混淆的信息</h3>
+<table>
+<thead>
+<tr>
+<th>信息</th>
+<th>用途</th>
+<th>填在哪里</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据库密码</td>
+<td>项目管理与数据库连接</td>
+<td>自己保管，<strong>不填网页</strong></td>
+</tr>
+<tr>
+<td>网站账号邮箱＋密码</td>
+<td>两地价登录</td>
+<td>网页登录框</td>
+</tr>
+<tr>
+<td>Project URL＋Publishable key</td>
+<td>网页连接你的项目</td>
+<td>下一步的 <code>config.js</code></td>
+</tr>
+</tbody>
+</table>
+<p>不要把密码或管理密钥发给 ChatGPT，也不要提交到仓库。</p>
+<h2 id="section-4">4. 给这个账号授权，并自检权限</h2>
+<p>打开 <code>supabase/02-authorize.sql</code>，复制到一个新的 SQL Editor 查询中。<strong>只在控制台查询里</strong>把这一行的占位文字替换为刚才复制的 User UID：</p>
+<pre><code class="language-sql">declare v_uid text := 'REPLACE_WITH_YOUR_AUTH_USER_UUID';
+</code></pre>
+<p>替换后应类似（以下是假 UUID，不能照抄使用）：</p>
+<pre><code class="language-sql">declare v_uid text := '12345678-1234-1234-1234-123456789abc';
+</code></pre>
+<p>运行<strong>整份</strong>授权脚本。看到 <code>authorized_users = 1</code> 即为预期结果。包内原文件保留占位符即可，不必把你填入实际 UID 的查询上传 GitHub。</p>
+<p>再复制并运行 <code>supabase/03-check.sql</code>。它应输出 10 项检查，<code>ok</code> 都为 <code>true</code>。这些检查确认表的 RLS、匿名访问限制、函数权限、单用户授权等结构；它们不能替代后面的真实双设备测试。</p>
+<p>**出现错误就停在这一步检查，不要关闭 RLS“试试看”。**常见原因是 UUID 填成邮箱、Auth 用户还没有创建、SQL 在另一个项目运行，或上一份脚本未完整执行。</p>
+<h2 id="section-5">5. 填写 <code>config.js</code>——只改两处</h2>
+<p>在项目顶部的 <strong>Connect</strong> 面板或项目 <strong>Settings → API Keys／Data API</strong> 区域找到：</p>
+<ul>
+<li><strong>Project URL</strong>：形如 <code>https://你的项目编号.supabase.co</code>。</li>
+<li><strong>Publishable key</strong>：以 <code>sb_publishable_</code> 开头。</li>
+</ul>
+<p>菜单位置可能调整，认准字段名。不要复制浏览器里的控制台地址 <code>supabase.com/dashboard/...</code>。<a href="https://supabase.com/docs/guides/api/api-keys">官方密钥说明</a></p>
+<p>在 VS Code 打开包内 <code>config.js</code>，只替换两个引号内的值，保留英文引号、逗号和括号：</p>
+<pre><code class="language-javascript">window.LDJ_CONFIG = Object.freeze({
+  supabaseUrl: "https://你的项目编号.supabase.co",
+  supabasePublishableKey: "sb_publishable_你的公开密钥"
+});
+</code></pre>
+<p>Publishable key 是设计为可以放到网页前端的公开连接信息；数据库权限仍由登录身份和 RLS 控制。**不要填写 <code>sb_secret_</code>、<code>service_role</code>、数据库密码或个人访问令牌。**本版会拒绝不符合格式的密钥。</p>
+<p>保存成 UTF-8 纯文本。使用 TextEdit 时要特别避免富文本或自动追加 <code>.txt</code>；优先沿用你熟悉的 VS Code。</p>
+<h2 id="section-6">6. 上传 GitHub 并打开 Pages</h2>
+<p>在 GitHub 创建一个仓库，名称推荐 <code>liangdijia</code>，选择 <strong>Public</strong>，可勾选添加 README。免费账号的这个方案使用公开仓库；普通 GitHub Pages 网页本身是公开入口，只有登录之后才能读取个人数据库。<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">Pages 官方说明</a></p>
+<p>进入仓库，点 <strong>Add file → Upload files</strong>。上传解压后文件夹<strong>里面的内容</strong>，不要上传 ZIP，也不要把外层文件夹再套进去。</p>
+<p>最少需要上传：</p>
+<pre><code class="language-text">仓库根目录/index.html
+仓库根目录/config.js
+仓库根目录/manifest.webmanifest
+仓库根目录/DEPLOY.html
+仓库根目录/assets/（整个文件夹）
+</code></pre>
+<p>本包的说明、SQL 占位脚本、测试源码也可以一起上传；其中没有你的实际账号凭据。<code>supabase/02-authorize.sql</code> 保留原占位符。</p>
+<p><strong>绝不能上传：你的 JSON 购物备份、旧版 <code>personal.sqlite3</code>、数据库密码、私钥、令牌。</strong><code>.gitignore</code> 只对常规 Git 跟踪有作用，不是防止网页手动上传敏感文件的保险，仍要自己核对文件清单。</p>
+<p>点 <strong>Commit changes</strong>。文件列表中应当直接看到 <code>index.html</code>，而不是先看到一个 <code>liangdijia-v0.2-cloud</code> 子文件夹。</p>
+<p>然后进入仓库 <strong>Settings → Pages</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source</td>
+<td>Deploy from a branch</td>
+</tr>
+<tr>
+<td>Branch</td>
+<td>main</td>
+</tr>
+<tr>
+<td>Folder</td>
+<td>/ (root)</td>
+</tr>
+</tbody>
+</table>
+<p>点 <strong>Save</strong>。这是静态文件，不需要 npm build，不需要配置 Actions 的密钥。<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">发布源配置说明</a></p>
+<p><code>.nojekyll</code> 是隐藏文件，访达默认可能看不到。可用 <code>Command + Shift + .</code> 显示后上传；也可以在仓库 <strong>Add file → Create new file</strong> 新建 <code>.nojekyll</code>，填一行注释或保留空文件后提交。</p>
+<p>GitHub 显示部署完成后，在 Pages 页点击 <strong>Visit site</strong>。通常网址形如：</p>
+<pre><code class="language-text">https://你的GitHub用户名.github.io/liangdijia/
+</code></pre>
+<p>以 GitHub 实际给出的完整网址为准，保存到书签。不是仓库页面 <code>github.com/用户名/liangdijia</code>，也不是 <code>github.io</code> 后遗漏了仓库名的网址。</p>
+<h2 id="section-7">7. 第一次登录与旧资料迁移</h2>
+<p>打开 Pages 网址，用步骤 3 创建的网站账号登录。只有当登录和云端读取都成功，才会进入购物空间。第一次是空清单，不代表旧资料丢了——旧版资料还在原浏览器和你的 JSON 备份中。</p>
+<p>先手动添加一个名称明确的测试商品，例如“部署验证—随后删除”。等页面显示 <strong>“已同步到云端 · v1”</strong> 或其他版本号。</p>
+<p>打开另一台电脑／手机的同一个网址，用同一账号登录。确认测试商品出现。修改备注或心愿单标记，等同步成功，再回第一台设备点击“立即同步”，确认能读回。</p>
+<p>验证通过后，删除测试商品，等待同步；再进入 <strong>设置与备份 → 导入旧版 / 备份</strong>，选择步骤 0 导出的 JSON 文件。核对弹窗中的商品数量后确认导入。导入是整份替换，不是自动合并；当现有清单非空时，网页会先发起一份替换前备份下载。</p>
+<p>等待“已同步到云端”，并再次用第二台设备确认商品数量、心愿单、香港清单和一项报价正确。<strong>不能只看“导入成功”的提示就清理旧版。</strong></p>
+<h3>最小上线验收</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>应看到的结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电脑新增、手机读取</td>
+<td>同一件商品出现</td>
+</tr>
+<tr>
+<td>手机修改备注／收藏、电脑同步</td>
+<td>修改被读回</td>
+</tr>
+<tr>
+<td>删除一个测试商品</td>
+<td>第二台设备同步后也删除</td>
+</tr>
+<tr>
+<td>无痕窗口打开网址，不登录</td>
+<td>只见登录页，不见你的清单</td>
+</tr>
+<tr>
+<td>浏览器已打开时临时断网并保存</td>
+<td>提示未同步；联网后可重试，草稿不被当作云端成功</td>
+</tr>
+<tr>
+<td>两台设备从同一旧版本各自修改</td>
+<td>后保存者明确提示冲突，不静默覆盖</td>
+</tr>
+<tr>
+<td>导出再检查 JSON</td>
+<td>商品存在，不含密码／登录令牌</td>
+</tr>
+</tbody>
+</table>
+<p>请在深圳常用 Wi-Fi 和手机网络都测试“登录＋保存＋读回”。本包没有在你的网络、真实 Supabase 项目或 iOS／华为浏览器上实测。免费项目暂停、网络不可达或配置错误都可能导致页面能打开但数据连不上。</p>
+<h2 id="section-8">8. iCloud 备份怎样日常使用</h2>
+<p>进入 <strong>设置与备份 → 导出到 iCloud / 文件</strong>。</p>
+<p>支持选择保存位置的浏览器会弹出文件选择器，在其中选择 <code>iCloud Drive/两地价备份/</code>。其他浏览器会下载 JSON；下载后在访达或“文件”中将其移动到该目录。手机浏览器的下载保存位置由系统与浏览器决定，以实际界面为准。</p>
+<p>文件名含日期、时分秒，例如：</p>
+<pre><code class="language-text">liangdijia-backup-2026-10-10-143205.json
+</code></pre>
+<p>若含未同步修改，文件名会标为 <code>unsynced</code>。备份与旧版相同，保存的是购物资料，不含 Supabase 登录令牌和密码。</p>
+<p>**这里不是自动 iCloud 接口。**网页可以发起下载或写入你选择的文件，但无法确认 iCloud 是否已上传成功。请在系统里检查文件状态；没有文件选择权限时，不会强行写入系统目录。<a href="https://support.apple.com/guide/icloud/upload-and-download-files-mmad632d1df2/icloud">Apple 的 iCloud Drive 文件说明</a></p>
+<p>建议在大批录入后、准备去香港购物前，以及修改网站或数据库配置前留一份备份。不要让两台设备分别导出后又随意导入不同旧文件；正常日常使用只依赖 Supabase 同步。</p>
+<h2 id="section-9">9. 冲突与断网：怎样处理才不会丢东西</h2>
+<p>本版按“完整购物空间＋版本号”保存，兼容旧备份。它适合一个人低频编辑，不是多人实时协作数据库。</p>
+<p>两台设备同时修改时，后保存的一台可能显示“版本冲突”。此时这台设备仍显示它自己的草稿，<strong>并未自动合并到云端</strong>。点击“备份后载入云端”，先导出草稿；网页会再问一次是否已经确认文件保存成功，确认后才载入最新云端资料。之后参照刚才的备份补回需要的变更。</p>
+<p>不要为了消除警告直接把旧备份整库导回去，否则可能把别的设备的新修改替换掉。没有自动“强制覆盖云端”按钮。</p>
+<p>每个标签页的本机草稿单独存放；页面重新加载时会检查版本。关闭旧标签页后，可到“检查本机草稿”导出其他标签页留下的待核对副本。草稿只存在此浏览器，不等于云同步，也不会跨浏览器自动恢复。</p>
+<p>网络中断期间，<strong>已打开且已成功读取过云端的页面</strong>可以保存修改到本机草稿。首次登录／重新打开页面仍需要联网读取云端，本版不是完整离线 PWA，也没有让你误以为离线时已经同步成功。</p>
+<p>使用私人设备时可保持登录。某些不支持所需跨标签页锁机制的浏览器只在当前标签页保留登录，下次再登录即可，云端资料不受影响。普通本机草稿不是加密保险箱；公用设备不建议使用。</p>
+<h2 id="section-10">10. 常见问题</h2>
+<h3>Pages 404，或者只显示 README</h3>
+<p>检查 Pages 的分支和目录选择，以及 <code>index.html</code> 是否就在所选目录根部。不要把 ZIP 当网站上传，不要多套一层目录。确认 GitHub 部署已成功，打开 Pages 提供的 Visit site，而不是仓库链接。</p>
+<h3>页面提示“先填写 config.js”</h3>
+<p>在 GitHub 仓库里打开 <code>config.js</code>，确认是你的真实 Project URL 和 <code>sb_publishable_</code> 密钥，不是占位文字。保存提交，等新部署显示完成后刷新。不要只修改电脑里的文件而忘记上传。</p>
+<h3>邮箱或密码不正确</h3>
+<p>网站登录使用 Authentication → Users 创建的账号，不是数据库密码，也不自动等同于 GitHub 或 Supabase 管理后台的密码。</p>
+<h3>提示“尚未授权”</h3>
+<p>检查是否运行了 <code>02-authorize.sql</code>，UUID 是否就是当前登录用户，配置是否连到同一个 Supabase 项目。不要关闭 RLS 或把匿名用户加入白名单。</p>
+<h3>表不存在、函数不存在、权限错误</h3>
+<p>完整运行 <code>01-schema.sql</code>，再运行 <code>03-check.sql</code>。检查表和函数创建在 <code>public</code> schema，Data API 包含 public（新项目通常默认如此）。本版不依赖 Supabase Storage 文件桶，不需要创建公开 bucket。</p>
+<h3>能登录，但免费项目／网络导致读取失败</h3>
+<p>查看 Supabase 控制台项目是否暂停，按界面恢复项目；不要删除项目重建。再检查你的实际网络，回网页重试。程序不会用空清单覆盖读取失败的数据。项目长期停用后的恢复规则以官方当时政策为准。</p>
+<h3>忘记网站密码</h3>
+<p>还能在某个设备登录时，进入“设置与备份 → 修改网站密码”。已经完全无法登录时，使用你自己控制台的用户管理／官方 Auth Admin 恢复流程处理；切勿把管理密钥放进网页。</p>
+<p>**不要简单地删除 Auth 用户再重建。**数据库设置了归属关系，删除该用户会级联删除其购物空间；更改 UID 会被视为另一个用户。先保护备份。</p>
+<h3>是否已经能自动抓官网和小程序价格？</h3>
+<p>没有。v0.2 这次改造的是登录与跨设备同步。GitHub Pages 不运行 v0.1 的 Python 采集服务。官网链接、官方小程序手动录价、采集书签、比价、汇率手动设置、价格历史都保留；自动官网抓取、自动汇率更新、小程序私有接口和门店实时库存没有部署。页面对此有明确提示。</p>
+<h3>更新代码会不会清空购物资料？</h3>
+<p>按本版方式更新 GitHub 的界面文件不会主动清空 Supabase 资料。但不要切换项目、换 Auth 用户 UID 或手动删除数据表。任何数据库结构更新前先导出备份。</p>
+<h3>我需要一直开着 Mac 吗？</h3>
+<p>部署完成后不需要。只有选择下面的本地预览方式时才需要运行本地静态服务；日常直接打开 Pages 即可。</p>
+<h2 id="section-11">开发者补充（首次部署不必做）</h2>
+<p>在包所在目录运行 <code>python3 -m http.server 8000</code>，打开 <code>http://127.0.0.1:8000/</code> 可本地预览。需要已经正确填写 config.js；仍连接同一个真实云端项目，不是独立测试库。不要在预览里随意清空真实资料。</p>
+<p>单元测试：<code>node --test tests/sync.test.cjs</code>。浏览器测试使用本地 DOM 和模拟 REST／存储，不代表真正完成 Supabase 部署。详见 TEST_REPORT.md。</p>
+<p>此版使用标准 Fetch 调用 Supabase Auth 和 Data REST API，生产网页没有额外 CDN 依赖。所有资源是相对路径，支持 GitHub Pages 的仓库子路径。公开配置无管理级凭据；本地会话保存在浏览器存储中，通过实际 Auth 用户端点、访问名单、RLS 和带版本号的数据库函数读写。</p>
+<ul>
+<li><a href="https://supabase.com/docs/guides/auth/passwords">Supabase Auth 密码登录</a></li>
+<li><a href="https://supabase.com/docs/reference/self-hosting-auth/introduction">Supabase Auth API</a></li>
+<li><a href="https://supabase.com/docs/guides/api">Supabase Data REST API</a></li>
+<li><a href="https://supabase.com/docs/guides/database/functions">Supabase 数据库函数安全</a></li>
+<li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">GitHub Pages 发布配置</a></li>
+</ul>
+<p class="stamp">两地价 v0.2 · 2026-10-10 · 操作界面可能调整，以官方控制台为准。不要公开个人备份或管理密钥。</p></article></div></body></html>

@@ -1,0 +1,208 @@
+TAP version 13
+# Subtest: initial empty read never writes seed data
+ok 1 - initial empty read never writes seed data
+  ---
+  duration_ms: 3.670334
+  type: 'test'
+  ...
+# Subtest: normal create / update saves cloud versions
+ok 2 - normal create / update saves cloud versions
+  ---
+  duration_ms: 1.272213
+  type: 'test'
+  ...
+# Subtest: second device reads same data
+ok 3 - second device reads same data
+  ---
+  duration_ms: 0.836927
+  type: 'test'
+  ...
+# Subtest: stale device cannot overwrite newer cloud version
+ok 4 - stale device cannot overwrite newer cloud version
+  ---
+  duration_ms: 0.481415
+  type: 'test'
+  ...
+# Subtest: network save failure retains draft and base version
+ok 5 - network save failure retains draft and base version
+  ---
+  duration_ms: 0.749405
+  type: 'test'
+  ...
+# Subtest: load failure does not turn private data into empty cloud
+ok 6 - load failure does not turn private data into empty cloud
+  ---
+  duration_ms: 0.982662
+  type: 'test'
+  ...
+# Subtest: dirty draft survives page reload in same tab
+ok 7 - dirty draft survives page reload in same tab
+  ---
+  duration_ms: 0.687271
+  type: 'test'
+  ...
+# Subtest: cached stale draft opens in conflict, never auto overwritten
+ok 8 - cached stale draft opens in conflict, never auto overwritten
+  ---
+  duration_ms: 2.521631
+  type: 'test'
+  ...
+# Subtest: lost response retry is idempotent
+ok 9 - lost response retry is idempotent
+  ---
+  duration_ms: 0.914322
+  type: 'test'
+  ...
+# Subtest: reload recognizes lost acknowledgement without duplicate write
+ok 10 - reload recognizes lost acknowledgement without duplicate write
+  ---
+  duration_ms: 0.58293
+  type: 'test'
+  ...
+# Subtest: edit during save gets subsequent version, not dropped
+ok 11 - edit during save gets subsequent version, not dropped
+  ---
+  duration_ms: 1.518837
+  type: 'test'
+  ...
+# Subtest: edit during pull is retained and saved
+ok 12 - edit during pull is retained and saved
+  ---
+  duration_ms: 0.39363
+  type: 'test'
+  ...
+# Subtest: edit during pull of NEW remote version becomes conflict
+ok 13 - edit during pull of NEW remote version becomes conflict
+  ---
+  duration_ms: 0.313992
+  type: 'test'
+  ...
+# Subtest: explicit cloud reload resolves conflict
+ok 14 - explicit cloud reload resolves conflict
+  ---
+  duration_ms: 0.343685
+  type: 'test'
+  ...
+# Subtest: failed conflict reload does not discard draft
+ok 15 - failed conflict reload does not discard draft
+  ---
+  duration_ms: 0.361503
+  type: 'test'
+  ...
+# Subtest: user data caches are isolated
+ok 16 - user data caches are isolated
+  ---
+  duration_ms: 0.497034
+  type: 'test'
+  ...
+# Subtest: separate tabs keep recoverable separate drafts
+ok 17 - separate tabs keep recoverable separate drafts
+  ---
+  duration_ms: 0.44523
+  type: 'test'
+  ...
+# Subtest: late save response after logout cannot repopulate UI
+ok 18 - late save response after logout cannot repopulate UI
+  ---
+  duration_ms: 0.208223
+  type: 'test'
+  ...
+# Subtest: storage quota failure never reports local backup success
+ok 19 - storage quota failure never reports local backup success
+  ---
+  duration_ms: 0.160474
+  type: 'test'
+  ...
+# Subtest: oversized draft and wrong format rejected
+ok 20 - oversized draft and wrong format rejected
+  ---
+  duration_ms: 31.136636
+  type: 'test'
+  ...
+# Subtest: concurrent flush calls share one write
+ok 21 - concurrent flush calls share one write
+  ---
+  duration_ms: 0.590821
+  type: 'test'
+  ...
+# Subtest: clearing all products is real saved empty state, not missing row
+ok 22 - clearing all products is real saved empty state, not missing row
+  ---
+  duration_ms: 0.19277
+  type: 'test'
+  ...
+# Subtest: configuration rejects management secrets and hostile URLs
+ok 23 - configuration rejects management secrets and hostile URLs
+  ---
+  duration_ms: 0.778509
+  type: 'test'
+  ...
+# Subtest: login sends password only to Auth; storage never includes password
+ok 24 - login sends password only to Auth; storage never includes password
+  ---
+  duration_ms: 31.868678
+  type: 'test'
+  ...
+# Subtest: denied access never interpreted as empty workspace
+ok 25 - denied access never interpreted as empty workspace
+  ---
+  duration_ms: 1.397653
+  type: 'test'
+  ...
+# Subtest: REST allowed empty returns null only after permission check
+ok 26 - REST allowed empty returns null only after permission check
+  ---
+  duration_ms: 1.424815
+  type: 'test'
+  ...
+# Subtest: REST timeout/network error is not an empty workspace
+ok 27 - REST timeout/network error is not an empty workspace
+  ---
+  duration_ms: 1.128872
+  type: 'test'
+  ...
+# Subtest: auth token refresh deduplicated in one tab
+ok 28 - auth token refresh deduplicated in one tab
+  ---
+  duration_ms: 0.89856
+  type: 'test'
+  ...
+# Subtest: wrong-account save rejected before network request
+ok 29 - wrong-account save rejected before network request
+  ---
+  duration_ms: 0.52301
+  type: 'test'
+  ...
+# Subtest: REST uses publishable apikey and user bearer separately
+ok 30 - REST uses publishable apikey and user bearer separately
+  ---
+  duration_ms: 0.646467
+  type: 'test'
+  ...
+# Subtest: refresh does not create false logout storage event
+ok 31 - refresh does not create false logout storage event
+  ---
+  duration_ms: 0.446319
+  type: 'test'
+  ...
+# Subtest: reload or duplicated tab migrates draft into unique per-page key
+ok 32 - reload or duplicated tab migrates draft into unique per-page key
+  ---
+  duration_ms: 0.301516
+  type: 'test'
+  ...
+# Subtest: failed startup read still migrates recoverable prior-tab draft
+ok 33 - failed startup read still migrates recoverable prior-tab draft
+  ---
+  duration_ms: 0.799543
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 241.435368

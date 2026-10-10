@@ -1,0 +1,94 @@
+[
+  {
+    "check": "index.html: local ./assets/styles.css",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./assets/cloud.css",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./assets/icon.svg",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./manifest.webmanifest",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./index.html",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./DEPLOY.html",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./DEPLOY.html",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./config.js",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./assets/empty-state.js",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./assets/supabase-rest.js",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./assets/cloud-sync.js",
+    "passed": true
+  },
+  {
+    "check": "index.html: local ./assets/app.js",
+    "passed": true
+  },
+  {
+    "check": "DEPLOY.html: local ./assets/setup-preview.png",
+    "passed": true
+  },
+  {
+    "check": "config contains only placeholder public connection settings",
+    "passed": true
+  },
+  {
+    "check": "cloud initial catalog is empty",
+    "passed": true
+  },
+  {
+    "check": "manifest.webmanifest: valid JSON",
+    "passed": true
+  },
+  {
+    "check": "legacy-fixture.json: valid JSON",
+    "passed": true
+  },
+  {
+    "check": "browser-checks.json: valid JSON",
+    "passed": true
+  },
+  {
+    "check": "21 captured DOM checks all passed",
+    "passed": true
+  },
+  {
+    "check": "three SQL files supplied",
+    "passed": true
+  },
+  {
+    "check": "hidden static marker exists",
+    "passed": true
+  },
+  {
+    "check": "independent guide exists",
+    "passed": true
+  },
+  {
+    "check": "independent preview exists",
+    "passed": true
+  }
+]

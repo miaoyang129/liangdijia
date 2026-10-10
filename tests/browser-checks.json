@@ -1,0 +1,90 @@
+{
+  "checks": [
+    {
+      "name": "unconfigured shows setup, no fabricated data",
+      "passed": true
+    },
+    {
+      "name": "wrong login stays locked",
+      "passed": true
+    },
+    {
+      "name": "empty first login does not write seeds",
+      "passed": true
+    },
+    {
+      "name": "new product auto saves",
+      "passed": true
+    },
+    {
+      "name": "v0.1 import syncs six products",
+      "passed": true
+    },
+    {
+      "name": "Decathlon filter",
+      "passed": true
+    },
+    {
+      "name": "wishlist sync",
+      "passed": true
+    },
+    {
+      "name": "Hong Kong list sync",
+      "passed": true
+    },
+    {
+      "name": "second browser reads same wishlist and trip",
+      "passed": true
+    },
+    {
+      "name": "old snapshots do not produce confident comparison",
+      "passed": true
+    },
+    {
+      "name": "offline draft retained",
+      "passed": true
+    },
+    {
+      "name": "retry saves draft",
+      "passed": true
+    },
+    {
+      "name": "stale device cannot overwrite remote",
+      "passed": true
+    },
+    {
+      "name": "explicit backup then reload resolves conflict",
+      "passed": true
+    },
+    {
+      "name": "export compatible with v0.1 and excludes credentials",
+      "passed": true
+    },
+    {
+      "name": "auto extraction clearly marked unavailable",
+      "passed": true
+    },
+    {
+      "name": "390px mobile no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "mobile editor fits screen",
+      "passed": true
+    },
+    {
+      "name": "logout removes private UI",
+      "passed": true
+    },
+    {
+      "name": "permission failure never creates empty cloud",
+      "passed": true
+    },
+    {
+      "name": "no unhandled browser exceptions",
+      "passed": true
+    }
+  ],
+  "page_errors": [],
+  "scope": "about:blank DOM rendering with simulated storage/REST/download capture; NOT real network, native downloads, or live Supabase"
+}

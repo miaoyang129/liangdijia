@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#174b42"><meta name="color-scheme" content="light">
+<meta name="description" content="两地价：MUJI、UNIQLO、DECATHLON 的个人深港商品对照、心愿单与购物清单。">
+<title>两地价 · 深港购物小助手</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.supabase.co; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="./assets/styles.css">
+<link rel="stylesheet" href="./assets/cloud.css">
+<link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+<link rel="manifest" href="./manifest.webmanifest">
+</head>
+<body class="locked">
+<section id="auth-gate" class="auth-gate" aria-label="个人空间登录">
+ <div class="auth-story"><a class="brand auth-brand" href="./index.html"><span class="brand-symbol">⇄</span><span>两地价<small>LIANG DI JIA</small></span></a>
+ <div class="eyebrow">YOUR PRIVATE SHOPPING SPACE</div><h1>喜欢的东西，<br>换台设备也在。</h1><p>MUJI · UNIQLO · DECATHLON<br>深港对照、心愿单与香港清单，<br>保存在你自己的云端。</p><div class="auth-route">SZ <span>⇄</span> HK</div><p class="auth-footnote">GitHub Pages 放界面 · Supabase 存资料<br>iCloud 留一份你掌握的备份</p></div>
+ <div class="auth-card"><span class="status-tag">v0.2 · 个人云同步版</span><h2>进入我的购物空间</h2><p class="auth-intro">仅限你在 Supabase 控制台创建并授权的账号。这里不开放注册。</p>
+ <p id="auth-message" class="auth-message" role="alert" hidden></p>
+ <div id="auth-loading" class="auth-loading">正在检查配置…</div>
+ <form id="auth-form" hidden>
+  <div class="field"><label for="login-email">网站账号邮箱</label><input id="login-email" type="email" required autocomplete="username" inputmode="email" placeholder="你在 Authentication → Users 创建的邮箱"></div>
+  <div class="field"><label for="login-password">网站账号密码</label><input id="login-password" type="password" required autocomplete="current-password" placeholder="不是数据库密码"></div>
+  <label class="remember-line"><input id="login-remember" type="checkbox"> 在我的私人设备上保持登录</label><p id="remember-note" class="hint">请勿在公用设备勾选。登录令牌保存在此浏览器，密码不会写入应用备份。</p>
+  <button id="login-button" class="button primary auth-submit" type="submit">登录并读取云端 ${'→'}</button>
+ </form>
+ <div id="auth-setup" hidden><p>第一次部署只需完成三个部分：建立数据库、创建自己的账号、填写公开连接信息。</p><a class="button primary auth-submit" href="./DEPLOY.html">打开分步部署指南 →</a><p class="hint">本安装包没有配置你的真实项目，也没有包含任何个人账号或密钥。</p></div>
+ <div id="auth-retry" hidden><p class="hint">未把连接失败当作空清单，也没有清空你的本机草稿。</p><div class="inline-actions"><button class="button primary" id="retry-connection">重新连接</button><button class="button" id="return-login">返回登录</button></div></div>
+ <button class="button small" id="auth-draft" hidden>导出当前账号的本机草稿</button>
+ <p class="auth-guide"><a href="./DEPLOY.html">部署、旧资料迁移与故障排查</a></p>
+ </div>
+</section>
+<a class="skip-link" href="#main">跳到内容</a>
+<aside class="sidebar">
+ <a class="brand" href="#" data-action="nav" data-view="catalog" aria-label="两地价首页"><span class="brand-symbol">⇄</span><span>两地价<small>LIANG DI JIA</small></span></a>
+ <div class="workspace"><span class="status-dot"></span> 个人购物空间 <span class="version">v0.2</span></div>
+ <nav aria-label="主要导航" id="navigation"></nav>
+ <div class="sidebar-bottom"><div class="route-mini"><span>SZ</span><i></i><span>HK</span></div><strong>把喜欢留下，把价格看清。</strong><p>三个品牌 · 两个地区<br>只收录官方渠道的报价</p><div id="storage-status" role="status">登录后连接云端</div></div>
+</aside>
+<div class="app-shell">
+ <header class="topbar"><div class="breadcrumbs">我的空间 <span>/</span> <b id="page-label">商品对照</b></div><div class="top-actions"><button class="button small cloud-sync-button" data-action="cloud-sync"><span class="cloud-dot"></span><span id="cloud-state-text">正在连接云端</span></button><span id="account-email" class="account-email"></span><span class="location-chip">深圳 <span>⇄</span> 香港</span><button class="button primary small" data-action="new"><span>＋</span> 添加商品</button></div></header>
+ <div id="cloud-banner" class="cloud-banner" hidden><span id="cloud-warning"></span><div class="inline-actions"><button class="button small" data-action="export">导出本机草稿</button><button class="button small" data-action="cloud-sync">重试同步</button><button class="button small" id="cloud-reload-button" data-action="cloud-reload" hidden>备份后载入云端</button></div></div><main id="main" tabindex="-1"></main>
+ <footer class="page-footer"><span>两地价 · 个人云同步版</span><span>官网价格 ≠ 门店成交价 · 库存请另行核实</span></footer>
+</div>
+<dialog id="editor" class="editor-dialog" aria-labelledby="editor-title"></dialog>
+<dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-title"></dialog>
+<dialog id="draft-dialog" class="confirm-dialog"></dialog>
+<dialog id="password-dialog" class="confirm-dialog"></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="import-file" accept="application/json,.json" hidden>
+<script src="./config.js" defer></script>
+<script src="./assets/empty-state.js" defer></script>
+<script src="./assets/supabase-rest.js" defer></script>
+<script src="./assets/cloud-sync.js" defer></script>
+<script src="./assets/app.js" defer></script>
+<noscript><p>此网站需要启用 JavaScript。请先查看部署指南。</p></noscript>
+</body></html>
