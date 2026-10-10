@@ -5,10 +5,10 @@
 <meta name="theme-color" content="#174b42"><meta name="color-scheme" content="light">
 <meta name="description" content="两地价：MUJI、UNIQLO、DECATHLON 的个人深港商品对照、心愿单与购物清单。">
 <title>两地价 · 深港购物小助手</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.supabase.co; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.supabase.co; img-src 'self' https:; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
-<link rel="stylesheet" href="./assets/styles.css">
-<link rel="stylesheet" href="./assets/cloud.css">
+<link rel="stylesheet" href="./assets/styles.css?v=0.3.0">
+<link rel="stylesheet" href="./assets/cloud.css?v=0.3.0"><link rel="stylesheet" href="./assets/images.css?v=0.3.0">
 <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
 <link rel="manifest" href="./manifest.webmanifest">
 </head>
@@ -16,7 +16,7 @@
 <section id="auth-gate" class="auth-gate" aria-label="个人空间登录">
  <div class="auth-story"><a class="brand auth-brand" href="./index.html"><span class="brand-symbol">⇄</span><span>两地价<small>LIANG DI JIA</small></span></a>
  <div class="eyebrow">YOUR PRIVATE SHOPPING SPACE</div><h1>喜欢的东西，<br>换台设备也在。</h1><p>MUJI · UNIQLO · DECATHLON<br>深港对照、心愿单与香港清单，<br>保存在你自己的云端。</p><div class="auth-route">SZ <span>⇄</span> HK</div><p class="auth-footnote">GitHub Pages 放界面 · Supabase 存资料<br>iCloud 留一份你掌握的备份</p></div>
- <div class="auth-card"><span class="status-tag">v0.2 · 个人云同步版</span><h2>进入我的购物空间</h2><p class="auth-intro">仅限你在 Supabase 控制台创建并授权的账号。这里不开放注册。</p>
+ <div class="auth-card"><span class="status-tag">v0.3 · 官网图片外链版</span><h2>进入我的购物空间</h2><p class="auth-intro">仅限你在 Supabase 控制台创建并授权的账号。这里不开放注册。</p>
  <p id="auth-message" class="auth-message" role="alert" hidden></p>
  <div id="auth-loading" class="auth-loading">正在检查配置…</div>
  <form id="auth-form" hidden>
@@ -34,7 +34,7 @@
 <a class="skip-link" href="#main">跳到内容</a>
 <aside class="sidebar">
  <a class="brand" href="#" data-action="nav" data-view="catalog" aria-label="两地价首页"><span class="brand-symbol">⇄</span><span>两地价<small>LIANG DI JIA</small></span></a>
- <div class="workspace"><span class="status-dot"></span> 个人购物空间 <span class="version">v0.2</span></div>
+ <div class="workspace"><span class="status-dot"></span> 个人购物空间 <span class="version">v0.3</span></div>
  <nav aria-label="主要导航" id="navigation"></nav>
  <div class="sidebar-bottom"><div class="route-mini"><span>SZ</span><i></i><span>HK</span></div><strong>把喜欢留下，把价格看清。</strong><p>三个品牌 · 两个地区<br>只收录官方渠道的报价</p><div id="storage-status" role="status">登录后连接云端</div></div>
 </aside>
@@ -46,13 +46,15 @@
 <dialog id="editor" class="editor-dialog" aria-labelledby="editor-title"></dialog>
 <dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-title"></dialog>
 <dialog id="draft-dialog" class="confirm-dialog"></dialog>
+<dialog id="image-batch-dialog" class="confirm-dialog" aria-label="批量补图进度"></dialog>
 <dialog id="password-dialog" class="confirm-dialog"></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <input type="file" id="import-file" accept="application/json,.json" hidden>
 <script src="./config.js" defer></script>
-<script src="./assets/empty-state.js" defer></script>
-<script src="./assets/supabase-rest.js" defer></script>
-<script src="./assets/cloud-sync.js" defer></script>
-<script src="./assets/app.js" defer></script>
+<script src="./assets/empty-state.js?v=0.3.0" defer></script>
+<script src="./assets/supabase-rest.js?v=0.3.0" defer></script>
+<script src="./assets/cloud-sync.js?v=0.3.0" defer></script>
+<script src="./assets/image-core.js?v=0.3.0" defer></script>
+<script src="./assets/app.js?v=0.3.0" defer></script>
 <noscript><p>此网站需要启用 JavaScript。请先查看部署指南。</p></noscript>
 </body></html>
